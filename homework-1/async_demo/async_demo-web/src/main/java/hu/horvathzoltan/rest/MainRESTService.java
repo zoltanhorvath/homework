@@ -1,7 +1,6 @@
 package hu.horvathzoltan.rest;
 
 import hu.horvathzoltan.async.AsyncClass;
-
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 @Path("/test")
 public class MainRESTService {
@@ -54,5 +52,4 @@ public class MainRESTService {
             LOGGER.log(Level.SEVERE, "ExecutionException", e);
         }
     }
-
 }

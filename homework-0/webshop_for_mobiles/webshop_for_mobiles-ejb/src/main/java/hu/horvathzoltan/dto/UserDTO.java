@@ -52,7 +52,6 @@ public class UserDTO implements Serializable{
         this.admin = admin;
     }
 
-
     public List<MobileDTO> getCart() {
         return cart;
     }
@@ -116,5 +115,4 @@ public class UserDTO implements Serializable{
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-
 }
