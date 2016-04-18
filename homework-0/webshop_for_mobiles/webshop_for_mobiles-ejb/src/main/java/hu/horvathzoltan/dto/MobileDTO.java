@@ -1,12 +1,13 @@
 package hu.horvathzoltan.dto;
 
+import hu.horvathzoltan.annotation.Validate;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-
-public class MobileDTO {
-
+@Validate
+public class MobileDTO implements Serializable {
 
     @NotNull(message = "{hu.horvathzoltan.dto.MobileDTO.id.NotNull.message}")
     @Size(min = 36, max = 36, message = "{hu.horvathzoltan.dto.MobileDTO.id.Size.meesage}")
@@ -26,9 +27,10 @@ public class MobileDTO {
     @Min(value = 0, message = "hu.horvathzoltan.dto.MobileDTO.piece.Min.message}")
     private int piece;
 
-    public MobileDTO(){
+    public MobileDTO() {
         //Default Constructor
     }
+
     public MobileDTO(String id, String type, String manufacturer, int price, int piece) {
         this.id = id;
         this.type = type;

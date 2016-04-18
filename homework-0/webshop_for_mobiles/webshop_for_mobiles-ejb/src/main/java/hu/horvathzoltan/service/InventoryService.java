@@ -2,20 +2,18 @@ package hu.horvathzoltan.service;
 
 import hu.horvathzoltan.dto.MobileDTO;
 import hu.horvathzoltan.exception.InventoryException;
-
 import javax.annotation.PostConstruct;
-import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import java.io.Serializable;
 import java.util.*;
-
 
 @Singleton
 @Startup
-@LocalBean
-public class InventoryService {
-    private final Map<String, MobileDTO> mobileDTOMap = new HashMap<>();
+public class InventoryService implements Serializable {
+
     private static final int NUMBER_OF_MOBILE_TYPES = 4;
+    private final Map<String, MobileDTO> mobileDTOMap = new HashMap<>();
 
     @PostConstruct
     private void init() {

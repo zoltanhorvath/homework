@@ -2,12 +2,10 @@ package hu.horvathzoltan.dto;
 
 import hu.horvathzoltan.dto.UserDTO;
 import org.junit.*;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import javax.xml.registry.infomodel.User;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -15,7 +13,9 @@ public class UserDTOTest {
 
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
-    private static UserDTO userDTO;
+    private static LocalDate dateOfBirthForTests = LocalDate.of(1984, 2, 19);
+    private static LocalDate dateOfRegistrationFroTests = LocalDate.of(2016, 11, 1);
+
 
     @BeforeClass
     public static void init() {
@@ -28,138 +28,120 @@ public class UserDTOTest {
         validatorFactory.close();
     }
 
-    @Before
-    public void setUp(){
-        userDTO = new UserDTO.UserBuilder().build();
-    }
-
-
     /**********************************************
      * USERNAME TESTS
      **********************************************/
+
     @Test
     public void shouldViolateUsernameNotNullConstraint() {
-        userDTO.setUsername(null);
+        UserDTO userDTO = new UserDTO(null, "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "username");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.iterator().next().getInvalidValue());
-
     }
+
     @Test
     public void shouldViolateUsernameSizelConstraint() {
-        userDTO.setUsername("Sa");
+        UserDTO userDTO = new UserDTO("Sa", "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "username");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals("Sa", violations.iterator().next().getInvalidValue());
-
     }
+
     @Test
     public void shouldNotViolateUsernameSizelConstraint() {
-        userDTO.setUsername("Sas");
+        UserDTO userDTO = new UserDTO("San", "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "username");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals("Sas", userDTO.getUsername());
-
+        Assert.assertEquals("San", userDTO.getUsername());
     }
+
     /**********************************************
      * PASSWORD TESTS
      **********************************************/
+
     @Test
     public void shouldViolatePasswordNotNullConstraint() {
-        userDTO.setPassword(null);
+        UserDTO userDTO = new UserDTO("admin", null, "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "password");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.iterator().next().getInvalidValue());
-
     }
+
     @Test
     public void shouldViolatePasswordConstraints() {
-        userDTO.setPassword("asdf");
+        UserDTO userDTO = new UserDTO("admin", "asdf", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "password");
         Assert.assertEquals(3, violations.size());
         Assert.assertEquals("asdf", violations.iterator().next().getInvalidValue());
-
     }
+
     @Test
     public void shouldNotViolatePasswordConstraints() {
-        userDTO.setPassword("Abcd1+");
+        UserDTO userDTO = new UserDTO("admin", "Abcd1+", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "password");
         Assert.assertEquals(0, violations.size());
         Assert.assertEquals("Abcd1+", userDTO.getPassword());
-
     }
+
     /**********************************************
      * DATE OF BIRTH TESTS
      **********************************************/
+
     @Test
     public void shouldViolateDateOfBirthPastConstraint() {
-        userDTO.setDateOfBirth(LocalDate.of(2100,5,6));
+        LocalDate invalidDateOfBirth = LocalDate.of(2100, 2, 19);
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", invalidDateOfBirth, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "dateOfBirth");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals(LocalDate.of(2100,5,6), violations.iterator().next().getInvalidValue());
-
+        Assert.assertEquals(invalidDateOfBirth, violations.iterator().next().getInvalidValue());
     }
+
     @Test
     public void shouldNotViolateDateOfBirthPastConstraint() {
-        userDTO.setDateOfBirth(LocalDate.of(1987,5,6));
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "dateOfBirth");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals(LocalDate.of(1987,5,6), userDTO.getDateOfBirth());
-
+        Assert.assertEquals(dateOfBirthForTests, userDTO.getDateOfBirth());
     }
+
     /**********************************************
      * REGISTRATION DATE TESTS
      **********************************************/
+
     @Test
     public void shouldViolateRegistrationNotNullConstraint() {
-        userDTO.setRegistrationDate(null);
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", dateOfBirthForTests, null, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "registrationDate");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.iterator().next().getInvalidValue());
 
     }
+
     @Test
     public void shouldNotViolateRegistrationNotNullConstraint() {
-        userDTO.setRegistrationDate(LocalDate.of(1987,5,6));
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validateProperty(userDTO, "registrationDate");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals(LocalDate.of(1987,5,6), userDTO.getRegistrationDate());
-
+        Assert.assertEquals(dateOfRegistrationFroTests, userDTO.getRegistrationDate());
     }
+
     /**********************************************
      * CHRONOLOGICAL DATES TESTS
      **********************************************/
+
     @Test
     public void shouldViolateChronologicalDateConstraint() {
-        userDTO = new UserDTO.UserBuilder()
-                .setUsername("Elek")
-                .setPassword("Abcd1+")
-                .setDateOfBirth(LocalDate.of(1999,1,1))
-                .setRegistrationDate(LocalDate.of(1988,1,1))
-                .build()
-
-        ;
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", dateOfBirthForTests, dateOfRegistrationFroTests, true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
         Assert.assertEquals("Date of Birth must be before date of registration.", violations.iterator().next().getMessage());
         Assert.assertEquals(1, violations.size());
-
-
     }
+
     @Test
     public void shouldNotViolateChronologicalDateConstraint() {
-        userDTO = new UserDTO.UserBuilder()
-                .setUsername("Elek")
-                .setPassword("Abcd1+")
-                .setDateOfBirth(LocalDate.of(1988,1,1))
-                .setRegistrationDate(LocalDate.of(1999,1,1))
-                .build()
-
-        ;
+        UserDTO userDTO = new UserDTO("admin", "Password1", "Admin", "Janos", LocalDate.of(1984, 2, 19), LocalDate.of(2016, 11, 1), true);
         Set<ConstraintViolation<UserDTO>> violations = validator.validate(userDTO);
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals(LocalDate.of(1988,1,1), userDTO.getDateOfBirth());
-        Assert.assertEquals(LocalDate.of(1999,1,1), userDTO.getRegistrationDate());
-
-
     }
 }

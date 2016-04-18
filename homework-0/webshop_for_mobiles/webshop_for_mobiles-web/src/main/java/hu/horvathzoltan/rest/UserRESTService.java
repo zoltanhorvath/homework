@@ -3,7 +3,6 @@ package hu.horvathzoltan.rest;
 import hu.horvathzoltan.annotation.BeanValidation;
 import hu.horvathzoltan.dto.UserDTO;
 import hu.horvathzoltan.service.UserManagementService;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -68,6 +67,7 @@ public class UserRESTService {
     @Path("/login")
     public void login(@QueryParam("username") String username, @QueryParam("password") String password, @Context HttpServletRequest request) {
         UserDTO userDTO = userManagementService.getUser(username);
+
         if (userDTO != null && userDTO.getPassword().equals(password)) {
             HttpSession session = request.getSession(true);
             session.setAttribute("user", userDTO);

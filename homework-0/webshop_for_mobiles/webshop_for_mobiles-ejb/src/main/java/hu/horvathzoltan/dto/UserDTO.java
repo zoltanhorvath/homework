@@ -1,18 +1,18 @@
 package hu.horvathzoltan.dto;
 
-
 import hu.horvathzoltan.annotation.ChronologicalDate;
 import hu.horvathzoltan.annotation.Past;
-
+import hu.horvathzoltan.annotation.Validate;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-
+@Validate
 @ChronologicalDate(message = "{hu.horvathzoltan.dto.UserDTO.ChronologicalDate.message}")
-public class UserDTO {
+public class UserDTO implements Serializable{
 
     @NotNull(message = "{hu.horvathzoltan.dto.UserDTO.username.NotNull.message}")
     @Size(min = 3, message = "{hu.horvathzoltan.dto.UserDTO.username.Size.message}")
@@ -33,83 +33,25 @@ public class UserDTO {
 
     @Past(message = "{hu.horvathzoltan.dto.UserDTO.dateOfBirth.Past.message}")
     private LocalDate dateOfBirth;
+    @NotNull
+    private LocalDate registrationDate;
+    private boolean admin;
+    private List<MobileDTO> cart;
 
-    public UserDTO(){
+    public UserDTO() {
         //Default Constructor
     }
 
-
-    private LocalDate registrationDate;
-
-    private boolean admin;
-
-    private List<MobileDTO> cart;
-
-    private UserDTO(UserBuilder userBuilder) {
-        this.username = userBuilder.username;
-        this.password = userBuilder.password;
-        this.firstName = userBuilder.firstName;
-        this.lastName = userBuilder.lastName;
-        this.dateOfBirth = userBuilder.dateOfBirth;
-        this.registrationDate = userBuilder.registrationDate;
-        this.admin = userBuilder.admin;
-        this.cart = userBuilder.cart;
+    public UserDTO(String username, String password, String firstName, String lastName, LocalDate dateOfBirth, LocalDate registrationDate, boolean admin) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.registrationDate = registrationDate;
+        this.admin = admin;
     }
 
-    public static class UserBuilder {
-        private String username;
-        private String password;
-        private String firstName;
-        private String lastName;
-        private LocalDate dateOfBirth;
-        private LocalDate registrationDate;
-        private boolean admin;
-        private List<MobileDTO> cart;
-
-        public UserBuilder setUsername(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public UserBuilder setPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public UserBuilder setFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public UserBuilder setLastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public UserBuilder setDateOfBirth(LocalDate dateOfBirth) {
-            this.dateOfBirth = dateOfBirth;
-            return this;
-        }
-
-        public UserBuilder setRegistrationDate(LocalDate registrationDate) {
-            this.registrationDate = registrationDate;
-            return this;
-        }
-
-        public UserBuilder setAdmin(boolean admin) {
-            this.admin = admin;
-            return this;
-        }
-
-        public UserBuilder setCart(List<MobileDTO> cart) {
-            this.cart = cart;
-            return this;
-        }
-
-        public UserDTO build() {
-            return new UserDTO(this);
-        }
-    }
 
     public List<MobileDTO> getCart() {
         return cart;

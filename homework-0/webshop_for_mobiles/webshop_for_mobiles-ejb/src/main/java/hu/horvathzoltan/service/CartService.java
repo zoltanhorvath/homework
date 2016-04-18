@@ -1,22 +1,20 @@
 package hu.horvathzoltan.service;
 
 import hu.horvathzoltan.dto.MobileDTO;
-
-import javax.ejb.LocalBean;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Stateful
-@LocalBean
-public class CartService {
+public class CartService implements Serializable {
+
+    private final List<MobileDTO> cart = new ArrayList<>();
 
     @Inject
     private InventoryService inventoryService;
-
-    private final List<MobileDTO> cart = new ArrayList<>();
 
     public List<MobileDTO> getCart() {
         return cart;
@@ -32,6 +30,6 @@ public class CartService {
         for (MobileDTO mobileDTO : cart) {
             inventoryService.buyMobile(mobileDTO);
         }
-        
+
     }
 }

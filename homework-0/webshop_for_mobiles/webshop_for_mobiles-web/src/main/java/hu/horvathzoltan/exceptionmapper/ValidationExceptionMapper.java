@@ -1,7 +1,6 @@
 package hu.horvathzoltan.exceptionmapper;
 
 import hu.horvathzoltan.dto.ErrorDTO;
-
 import javax.inject.Inject;
 import javax.validation.ValidationException;
 import javax.ws.rs.core.MediaType;
@@ -16,11 +15,12 @@ public class ValidationExceptionMapper implements ExceptionMapper<ValidationExce
 
     @Inject
     private Logger logger;
+
     @Override
     public Response toResponse(ValidationException exception) {
-        logger.log(Level.SEVERE, "Validation Exception", exception);
+        logger.log(Level.WARNING, "Validation Exception", exception.getMessage());
+
         return Response.status(Response.Status.BAD_REQUEST)
                 .entity(new ErrorDTO(exception.getMessage())).type(MediaType.APPLICATION_JSON).build();
     }
-
 }

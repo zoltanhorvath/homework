@@ -1,7 +1,6 @@
 package hu.horvathzoltan.annotation;
 
 import hu.horvathzoltan.validator.ChronologicalDateValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
@@ -13,7 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = ChronologicalDateValidator.class)
 public @interface ChronologicalDate {
-    String message() default "{}";
+
+    String message() default "Dates must be chronological.";
 
     Class<?>[] groups() default {};
 

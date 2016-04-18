@@ -1,6 +1,9 @@
 package hu.horvathzoltan.exception;
 
-public class InventoryException extends RuntimeException{
+import javax.ejb.ApplicationException;
+
+@ApplicationException
+public class InventoryException extends RuntimeException {
     public InventoryException() {
         super();
     }

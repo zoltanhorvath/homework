@@ -1,7 +1,6 @@
 package hu.horvathzoltan.dto;
 
 import org.junit.*;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -34,13 +33,13 @@ public class MobileDTOTest {
     /**********************************************
      * ID TESTS
      **********************************************/
+
     @Test
     public void shouldViolateIdNotNullConstraint() {
         mobileDTO.setId(null);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "id");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals(null, violations.iterator().next().getInvalidValue());
-
     }
 
     @Test
@@ -58,7 +57,6 @@ public class MobileDTOTest {
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "id");
         Assert.assertEquals(0, violations.size());
         Assert.assertEquals(generatedUUID, mobileDTO.getId());
-
     }
 
     /**********************************************
@@ -79,7 +77,6 @@ public class MobileDTOTest {
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "type");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals("aa", violations.iterator().next().getInvalidValue());
-
     }
 
     @Test
@@ -93,6 +90,7 @@ public class MobileDTOTest {
     /**********************************************
      * MANUFACTURER TESTS
      **********************************************/
+
     @Test
     public void shouldViolateManufacturerNotNullConstraint() {
         mobileDTO.setManufacturer(null);
@@ -107,7 +105,6 @@ public class MobileDTOTest {
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "manufacturer");
         Assert.assertEquals(1, violations.size());
         Assert.assertEquals("aa", violations.iterator().next().getInvalidValue());
-
     }
 
     @Test
@@ -121,6 +118,7 @@ public class MobileDTOTest {
     /**********************************************
      * PRICE TESTS
      **********************************************/
+
     @Test
     public void shouldViolatePriceMinConstraint() {
         mobileDTO.setPrice(0);
@@ -140,6 +138,7 @@ public class MobileDTOTest {
     /**********************************************
      * PIECE TESTS
      **********************************************/
+
     @Test
     public void shouldViolatePieceMinConstraint() {
         mobileDTO.setPiece(-1);
@@ -155,5 +154,4 @@ public class MobileDTOTest {
         Assert.assertEquals(0, violations.size());
         Assert.assertEquals(0, mobileDTO.getPiece());
     }
-
 }
