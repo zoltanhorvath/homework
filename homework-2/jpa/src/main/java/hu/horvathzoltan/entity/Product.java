@@ -10,7 +10,7 @@ import java.io.Serializable;
         query = "select f.name from Furniture f where f.price > :price union select u.name from UpholsteryFabrics u where u.price > :price"
 )
 
-public abstract class Product extends AbstractItem implements Serializable{
+public abstract class Product extends AbstractItem{
 
     double price;
 
