@@ -14,11 +14,11 @@ import javax.persistence.*;
 
 public class Furniture extends Product {
 
-    double width;
+    private double width;
 
-    double height;
+    private double height;
 
-    double depth;
+    private double depth;
 
     @Enumerated(EnumType.STRING)
     FurnitureColor color;

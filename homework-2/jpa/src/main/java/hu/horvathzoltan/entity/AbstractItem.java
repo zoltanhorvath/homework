@@ -1,9 +1,10 @@
 package hu.horvathzoltan.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @MappedSuperclass
-public abstract class AbstractItem {
+public abstract class AbstractItem implements Serializable{
 
     @Id
     @GeneratedValue

@@ -44,10 +44,11 @@ public class MobileDTOTest {
 
     @Test
     public void shouldViolateIdLengthConstraint() {
-        mobileDTO.setId("fasdfasdvyx");
+		String testId = "fasdfasdvyx";
+        mobileDTO.setId(testId);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "id");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals("fasdfasdvyx", violations.iterator().next().getInvalidValue());
+        Assert.assertEquals(testId, violations.iterator().next().getInvalidValue());
     }
 
     @Test
@@ -73,18 +74,20 @@ public class MobileDTOTest {
 
     @Test
     public void shouldViolateTypeLengthConstraint() {
-        mobileDTO.setType("aa");
+		String testType = "aa";
+        mobileDTO.setType(testType);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "type");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals("aa", violations.iterator().next().getInvalidValue());
+        Assert.assertEquals(testType, violations.iterator().next().getInvalidValue());
     }
 
     @Test
     public void shouldNotViolateTypeLengthConstraint() {
-        mobileDTO.setType("aaa");
+		String testType = "aaa";
+        mobileDTO.setType(testType);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "type");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals("aaa", mobileDTO.getType());
+        Assert.assertEquals(testType, mobileDTO.getType());
     }
 
     /**********************************************
@@ -101,18 +104,20 @@ public class MobileDTOTest {
 
     @Test
     public void shouldViolateManufacturerLengthConstraint() {
-        mobileDTO.setManufacturer("aa");
+		String testManufacturer = "aa";
+		mobileDTO.setManufacturer(testManufacturer);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "manufacturer");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals("aa", violations.iterator().next().getInvalidValue());
+        Assert.assertEquals(testManufacturer, violations.iterator().next().getInvalidValue());
     }
 
     @Test
     public void shouldNotViolateManufacturerLengthConstraint() {
-        mobileDTO.setManufacturer("aaa");
+		String testManufacturer = "aaa";
+        mobileDTO.setManufacturer(testManufacturer);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "manufacturer");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals("aaa", mobileDTO.getManufacturer());
+        Assert.assertEquals(testManufacturer, mobileDTO.getManufacturer());
     }
 
     /**********************************************
@@ -121,18 +126,20 @@ public class MobileDTOTest {
 
     @Test
     public void shouldViolatePriceMinConstraint() {
-        mobileDTO.setPrice(0);
+		int testPrice = 0;
+        mobileDTO.setPrice(testPrice);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "price");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals(0, mobileDTO.getPrice());
+        Assert.assertEquals(testPrice, mobileDTO.getPrice());
     }
 
     @Test
     public void shouldNotViolatePriceMinConstraint() {
-        mobileDTO.setPrice(1);
+		int testPrice = 1;
+        mobileDTO.setPrice(testPrice);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "price");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals(1, mobileDTO.getPrice());
+        Assert.assertEquals(testPrice, mobileDTO.getPrice());
     }
 
     /**********************************************
@@ -141,17 +148,19 @@ public class MobileDTOTest {
 
     @Test
     public void shouldViolatePieceMinConstraint() {
-        mobileDTO.setPiece(-1);
+		int testPiece = -1;
+        mobileDTO.setPiece(testPiece);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "piece");
         Assert.assertEquals(1, violations.size());
-        Assert.assertEquals(-1, mobileDTO.getPiece());
+        Assert.assertEquals(testPiece, mobileDTO.getPiece());
     }
 
     @Test
     public void shouldNotViolatePieceMinConstraint() {
+		int testPiece = 0;
         mobileDTO.setPiece(0);
         Set<ConstraintViolation<MobileDTO>> violations = validator.validateProperty(mobileDTO, "piece");
         Assert.assertEquals(0, violations.size());
-        Assert.assertEquals(0, mobileDTO.getPiece());
+        Assert.assertEquals(testPiece, mobileDTO.getPiece());
     }
 }

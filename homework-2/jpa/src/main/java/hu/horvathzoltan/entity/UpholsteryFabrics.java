@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Table(name = "UPHOLSTERY_FABRICS")
 public class UpholsteryFabrics extends Product {
 
-    double width;
+    private double width;
 
     public UpholsteryFabrics() {
         // Default Constructor

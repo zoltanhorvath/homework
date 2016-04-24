@@ -3,6 +3,7 @@ package hu.horvathzoltan.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.io.Serializable;
 
 @Entity
 @NamedQueries({
@@ -15,7 +16,7 @@ import java.util.List;
         )
 })
 
-public class Contact {
+public class Contact implements Serializable{
 
     @Id
     @GeneratedValue

@@ -1,6 +1,7 @@
 package hu.horvathzoltan.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -9,7 +10,7 @@ import javax.persistence.*;
         query = "select f.name from Furniture f where f.price > :price union select u.name from UpholsteryFabrics u where u.price > :price"
 )
 
-public abstract class Product extends AbstractItem {
+public abstract class Product extends AbstractItem implements Serializable{
 
     double price;
 

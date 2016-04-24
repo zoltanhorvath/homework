@@ -2,9 +2,10 @@ package hu.horvathzoltan.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.io.Serializable;
 
 @Entity
-public class Company {
+public class Company implements Serializable{
 
     @Id
     @GeneratedValue()
