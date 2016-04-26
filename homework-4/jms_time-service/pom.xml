@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>hu.horvathzoltan</groupId>
+    <artifactId>jms_time-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>jms_time-service</name>
+    <modules>
+        <module>jms_time-service-ear</module>
+        <module>jms_time-service-web</module>
+        <module>jms_time-service-ejb</module>
+    </modules>
+    <properties>
+        <sonar.login>zoltan.horvath</sonar.login>
+        <sonar.password>horviy87</sonar.password>
+        <sonar.host.url>http://sonar.codingmentor.xyz</sonar.host.url>
+    </properties>
+</project>
