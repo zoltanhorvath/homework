@@ -1,0 +1,74 @@
+********** MACHINE ***********
+{
+  "name" : "machine1",
+  "machineSize" : 20,
+  "ticketPrice" : 5,
+  "capacity" : 40,
+  "ageLimit" : 14,
+  "type" : "dodgem"
+}
+GET
+/machine
+GET
+/machine/{machine_id}
+PUT
+/machine/update_machine
+POST
+/machine/add_machine
+DELETE
+/machine/{machine_id}
+GET
+machine/{machine_id}/visitors
+*********** PARK **************
+{
+  "address": {
+    "zipCode": "H-9250",
+    "country": "Italy",
+    "city": "Rome",
+    "street": "Via Appia",
+    "streetNumber": "11/a"
+  },
+  "name" : "test",
+  "capital" : 50000,
+  "ticketPrice" : 100,
+  "parkSpace" : 400
+}
+
+GET
+/park
+GET
+/park/{park_id}
+PUT
+/park/update_park
+DELETE
+/park/{park_id}
+POST
+/park/add_park
+POST
+/park/{park_id}/add_machine
+POST
+/park/{park_id}/add_visitor
+{
+  "name" : "Test Elek",
+  "money" : 5000,
+  "age" : 22,
+  "active" : true,
+  "state" : "rest"
+}
+DELETE
+/park/{park_id}/visitor/{visitor_id}
+POST
+/park/{park_id}/machine/{machine_id}/visitor/{visitor_id}
+DELETE
+/park/{park_id}/machine/{machine_id}/visitor/{visitor_id}
+DELETE
+/park/{park_id}/remove_machine/{machine_id}
+GET
+/park/{park_id}/get_address
+GET
+/park/{park_id}/get_machines)
+GET
+/park/{park_id}/resting_visitors)
+*********** Guest Book **************
+GET
+/guest_book/park/{park_id}/visitor/{visitor_id}

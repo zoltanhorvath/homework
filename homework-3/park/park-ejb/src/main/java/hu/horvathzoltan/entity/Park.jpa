@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="hu.horvathzoltan.entity" v="1.5.5" xs="false" id="_146281569913754" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity xre="false" sm="false" abs="false" class="Park" visibile="true" minimized="false" rootElement="_146281569913754" id="_1462815717318">
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="name" id="_146281583347664">
+                <bv/>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="capital" id="_146281586636066">
+                <bv/>
+            </basic>
+            <basic optional="true" attribute-type="int" visibile="true" name="ticketPrice" id="_146281593075267">
+                <bv/>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="parkSpace" id="_146281595196368">
+                <bv/>
+            </basic>
+            <one-to-many collection-type="java.util.List" connected-entity-id="_1462816005559" connected-attribute-id="_1462817264486150" visibile="true" name="visitors" id="_1462817264488151"/>
+            <one-to-many collection-type="java.util.List" connected-entity-id="_1462816012495" connected-attribute-id="_1462817281295152" visibile="true" name="machines" id="_1462817281297153"/>
+            <one-to-one own="true" primaryKey="false" connected-entity-id="_1462815766203" visibile="true" name="address" id="_146281585517365"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_146281571731955"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity xre="false" sm="false" abs="false" class="Address" visibile="true" minimized="false" rootElement="_146281569913754" id="_1462815766203">
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="zipCode" id="_146281577861259">
+                <bv/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="country" id="_146281577901860">
+                <bv/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="city" id="_146281577936661">
+                <bv/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="street" id="_146281577971562">
+                <bv/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="streetNumber" id="_146281578209763">
+                <bv/>
+            </basic>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_146281576620457"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity xre="false" sm="false" abs="false" class="Visitor" visibile="true" minimized="false" rootElement="_146281569913754" id="_1462816005559">
+        <jpa:attributes>
+            <basic attribute-type="int" visibile="true" name="money" id="_146281604657973">
+                <bv/>
+            </basic>
+            <basic attribute-type="java.util.Calendar" visibile="true" name="entryDate" id="_146281608568876">
+                <bv/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="age" id="_146281611894177">
+                <bv/>
+            </basic>
+            <basic attribute-type="boolean" visibile="true" name="active" id="_146281614020378">
+                <bv/>
+            </basic>
+            <basic attribute-type="hu.horvathzoltan.state.VisitorState" visibile="true" name="state" id="_146281616047879">
+                <bv/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </basic>
+            <many-to-one primaryKey="false" connected-entity-id="_1462816012495" connected-attribute-id="_1462817238561149" visibile="true" name="machine" id="_1462817238559148"/>
+            <many-to-one primaryKey="false" connected-entity-id="_1462815717318" connected-attribute-id="_1462817264488151" visibile="true" name="park" id="_1462817264486150"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_146281600556069"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity xre="false" sm="false" abs="false" class="Machine" visibile="true" minimized="false" rootElement="_146281569913754" id="_1462816012495">
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="name" id="_146281633502080">
+                <bv/>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="machineSize" id="_146281634103081">
+                <bv/>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="ticketPrice" id="_146281643531482">
+                <bv/>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="capacity" id="_146281645514183">
+                <bv/>
+            </basic>
+            <basic attribute-type="hu.horvathzoltan.type.MachineType" visibile="true" name="type" id="_146281654053084">
+                <bv/>
+                <jpa:enumerated>STRING</jpa:enumerated>
+            </basic>
+            <basic attribute-type="int" visibile="true" name="ageLimit" id="_146281656404285">
+                <bv/>
+            </basic>
+            <many-to-one primaryKey="false" connected-entity-id="_1462815717318" connected-attribute-id="_1462817281297153" visibile="true" name="park" id="_1462817281295152"/>
+            <one-to-many collection-type="java.util.List" connected-entity-id="_1462816005559" connected-attribute-id="_1462817238559148" visibile="true" name="visitors" id="_1462817238561149"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_146281601249671">
+                <bv/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity xre="false" sm="false" abs="false" class="GuestBook" visibile="true" minimized="false" rootElement="_146281569913754" id="_1462816074114">
+        <jpa:attributes>
+            <basic attribute-type="String" visibile="true" name="entryDate" id="_1462817329719154">
+                <bv/>
+            </basic>
+            <basic attribute-type="String" visibile="true" name="text" id="_1462817332131155">
+                <bv/>
+            </basic>
+            <one-to-one own="true" primaryKey="false" connected-entity-id="_1462815717318" visibile="true" name="park" id="_1462817406069156"/>
+            <one-to-one own="true" primaryKey="false" connected-entity-id="_1462816005559" visibile="true" name="visitor" id="_1462817415985157"/>
+            <jpa:id attribute-type="Long" visibile="true" name="id" id="_146281607411474"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:diagram>
+        <plane elementRef="_146281569913754">
+            <shape elementRef="_1462815717318">
+                <Bounds x="77.0" y="58.0" width="128.0" height="231.0"/>
+            </shape>
+            <shape elementRef="_1462815766203">
+                <Bounds x="-48.0" y="300.0" width="144.0" height="176.0"/>
+            </shape>
+            <shape elementRef="_1462816005559">
+                <Bounds x="553.0" y="163.0" width="133.0" height="231.0"/>
+            </shape>
+            <shape elementRef="_1462816012495">
+                <Bounds x="294.0" y="5.0" width="144.0" height="252.0"/>
+            </shape>
+            <shape elementRef="_1462816074114">
+                <Bounds x="261.0" y="445.0" width="158.0" height="168.0"/>
+            </shape>
+        </plane>
+    </jpa:diagram>
+</jpa:entity-mappings>
